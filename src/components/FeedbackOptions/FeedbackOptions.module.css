@@ -1,0 +1,9 @@
+.buttonSection {
+  display: flex;
+  gap: 15px;
+}
+button {
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
