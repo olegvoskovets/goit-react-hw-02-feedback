@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-
-import PropTypes from 'prop-types';
 import css from './App.module.css';
 import { FeedbackOptions } from 'components/FeedbackOptions/FeedbackOptions';
 import { Statistics } from 'components/Statistics/Statistics';
