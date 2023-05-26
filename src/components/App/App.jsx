@@ -40,14 +40,15 @@ class App extends Component {
   };
 
   handleCliclFeedback = e => {
+    // console.log(e.target);
     switch (e.target.name) {
-      case 'addGood':
+      case 'good':
         this.addGood();
         break;
-      case 'addNeutral':
+      case 'neutral':
         this.addNeutral();
         break;
-      case 'addBud':
+      case 'bad':
         this.addBud();
         break;
 
@@ -57,10 +58,15 @@ class App extends Component {
   };
 
   render() {
+    const options = Object.keys(this.state);
+
     return (
       <div className={css.container}>
         <Section title="Please leave feedback">
-          <FeedbackOptions options={this.handleCliclFeedback} />
+          <FeedbackOptions
+            options={options}
+            onLeaveFeedback={this.handleCliclFeedback}
+          />
         </Section>
 
         <Section title="Statistics">
