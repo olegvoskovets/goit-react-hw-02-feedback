@@ -1,16 +1,16 @@
 import css from './FeedbackOptions.module.css';
 
-export const FeedbackOptions = ({ addBud, addGood, addNeutral }) => {
+export const FeedbackOptions = ({ options }) => {
   return (
     <>
       <div className={css.buttonSection}>
-        <button type="button" onClick={addGood}>
+        <button name="addGood" type="button" onClick={options}>
           Good
         </button>
-        <button type="button" onClick={addNeutral}>
+        <button name="addNeutral" type="button" onClick={options}>
           Neutral
         </button>
-        <button type="button" onClick={addBud}>
+        <button name="addBud" type="button" onClick={options}>
           Bud
         </button>
       </div>

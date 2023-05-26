@@ -39,15 +39,28 @@ class App extends Component {
     });
   };
 
+  handleCliclFeedback = e => {
+    switch (e.target.name) {
+      case 'addGood':
+        this.addGood();
+        break;
+      case 'addNeutral':
+        this.addNeutral();
+        break;
+      case 'addBud':
+        this.addBud();
+        break;
+
+      default:
+        console.log('No name');
+    }
+  };
+
   render() {
     return (
       <div className={css.container}>
         <Section title="Please leave feedback">
-          <FeedbackOptions
-            addBud={this.addBud}
-            addNeutral={this.addNeutral}
-            addGood={this.addGood}
-          />
+          <FeedbackOptions options={this.handleCliclFeedback} />
         </Section>
 
         <Section title="Statistics">
