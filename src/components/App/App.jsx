@@ -5,60 +5,65 @@ import { Statistics } from 'components/Statistics/Statistics';
 import { Section } from 'components/Section/Section';
 
 class App extends Component {
-  static defaultProps = {
-    initialGood: 0,
-    initialNeutral: 0,
-    initialBad: 0,
-  };
-
   state = {
-    good: this.props.initialGood,
-    neutral: this.props.initialNeutral,
-    bad: this.props.initialBad,
-  };
-
-  addGood = () => {
-    this.setState(prevState => {
-      return {
-        good: prevState.good + 1,
-      };
-    });
-  };
-  addNeutral = () => {
-    this.setState(prevState => {
-      return {
-        neutral: prevState.neutral + 1,
-      };
-    });
-  };
-  addBud = () => {
-    this.setState(prevState => {
-      return {
-        bad: prevState.bad + 1,
-      };
-    });
+    good: 0,
+    neutral: 0,
+    bad: 0,
   };
 
   handleCliclFeedback = e => {
-    // console.log(e.target);
-    switch (e.target.name) {
-      case 'good':
-        this.addGood();
-        break;
-      case 'neutral':
-        this.addNeutral();
-        break;
-      case 'bad':
-        this.addBud();
-        break;
+    this.setState(this.state);
+    const name = e.target.name;
+    this.setState({ [name]: this.state[name] + 1 });
 
-      default:
-        console.log('No name');
+    // switch (e.target.name) {
+    //   case 'good':
+    //     this.setState(prevState => {
+    //       return {
+    //         good: prevState.good + 1,
+    //       };
+    //     });
+    //     break;
+    //   case 'neutral':
+    //     this.setState(prevState => {
+    //       return {
+    //         neutral: prevState.neutral + 1,
+    //       };
+    //     });
+    //     break;
+    //   case 'bad':
+    //     this.setState(prevState => {
+    //       return {
+    //         bad: prevState.bad + 1,
+    //       };
+    //     });
+    //     break;
+
+    //   default:
+    //     console.log('No name');
+    // }
+  };
+
+  countTotalFeedback = obj => {
+    let count = 0;
+    for (let key in obj) {
+      count += obj[key];
+    }
+    return count;
+  };
+  countPositiveFeedbackPercentage = (count, good) => {
+    if (count > 0) {
+      return Math.round((good / count) * 100);
     }
   };
 
   render() {
     const options = Object.keys(this.state);
+    const total = this.countTotalFeedback(this.state);
+    const prosent = this.countPositiveFeedbackPercentage(
+      total,
+      this.state.good
+    );
 
     return (
       <div className={css.container}>
@@ -70,11 +75,7 @@ class App extends Component {
         </Section>
 
         <Section title="Statistics">
-          <Statistics
-            good={this.state.good}
-            neutral={this.state.neutral}
-            bad={this.state.bad}
-          />
+          <Statistics state={this.state} total={total} prosent={prosent} />
         </Section>
       </div>
     );
