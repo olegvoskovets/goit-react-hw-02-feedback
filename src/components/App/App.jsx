@@ -12,7 +12,6 @@ class App extends Component {
   };
 
   handleCliclFeedback = e => {
-    this.setState(this.state);
     const name = e.target.name;
     this.setState({ [name]: this.state[name] + 1 });
 
